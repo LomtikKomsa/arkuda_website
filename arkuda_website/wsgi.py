@@ -1,5 +1,5 @@
 """
-WSGI config for wagtail_demo project.
+WSGI config for arkuda_website project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wagtail_demo.settings.dev")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "arkuda_website.settings.dev")
 
 application = get_wsgi_application()
