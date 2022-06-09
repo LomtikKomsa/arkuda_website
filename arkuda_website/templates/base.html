@@ -16,14 +16,12 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    {% block css %}
-    {% endblock %}
+    {% block extra_css %}{% endblock %}
 
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
-
     {% block content %}{% endblock %}
 </body>
 
