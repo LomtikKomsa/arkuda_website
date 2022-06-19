@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static '/css/home_page.css' %}">
@@ -18,7 +18,7 @@
                 <div class="collapse navbar-collapse" id="navbarCommon">
                     <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Главная</a></li>
-                        <li class="nav-item dropdown">
+                        {% comment %} <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Проекты</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
                                 <li><a class="dropdown-item" href="#">Шоу Аркуда</a></li>
@@ -35,7 +35,7 @@
                                 <li><a href="#" class="dropdown-item">СМИ о нас</a></li>
                                 <li><a href="#" class="dropdown-item">Контакты</a></li>
                             </ul>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </div>
             </div>
@@ -70,25 +70,32 @@
             <div class="container">
                 <h1>Последние новости</h1>
                 <div class="row row-cols-2 row-cols-md-3 gy-3">
+                    {% for post in newspages %}
+                    {% with post=post.specific %}
                     <div class="col">
                         <div class="card">
-                            <img class="card-img-top" src="{% static 'empty_image.png' %}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                            {% image post.main_image original as main_image %}
+                                {% if main_image %}
+                                <img class="card-img-top" src="{{ main_image.url }}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'empty_image.png' %}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                {% endif %}
                             <div class="card-body">
-                                <p class="card-text">
-                                    Описание
-                                </p>
+                                <p class="card-text">{{ post.intro }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="#"><span>Подробнее...</span></a>
-                                    <small class="text-muted">Дата</small>
+                                    <a href="{% pageurl post %}"><span>Подробнее...</span></a>
+                                    <small class="text-muted">{{ post.date }}</small>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endwith %}
+                    {% endfor %}
                 </div>
-                <p class="text-center pt-3"><a href="#">Все новости</a></p>
+                <p class="text-center pt-3"><a href="{% pageurl newsindexpage %}">Все новости</a></p>
             </div>
         </div>
-        <div class="tours py-5">
+        {% comment %} <div class="tours py-5">
             <div class="container">
                 <h1>Туры</h1>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 gy-3">
@@ -108,7 +115,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
     </main>
     <footer class="footer">
         <div class="container">

@@ -1,16 +1,36 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-
-    <div class="intro">{{ page.intro|richtext }}</div>
-
-    {% for post in page.get_children %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-        {{ post.specific.intro }}
-        {{ post.specific.body|richtext }}
-    {% endfor %}
+    
+    <div class="news pt-5">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+            <div class="row row-cols-2 row-cols-md-3 gy-3">
+                {% for post in newspages %}
+                {% with post=post.specific %}
+                <div class="col">
+                    <div class="card">
+                        {% image post.main_image original as main_image %}
+                            {% if main_image %}
+                            <img class="card-img-top" src="{{ main_image.url }}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'empty_image.png' %}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                            {% endif %}
+                        <div class="card-body">
+                            <p class="card-text">{{ post.intro }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% pageurl post %}"><span>Подробнее...</span></a>
+                                <small class="text-muted">{{ post.date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
