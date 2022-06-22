@@ -18,6 +18,7 @@
     </title>
 
     <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static '/css/common.css' %}">
     <link rel="icon" href="{% static 'favicon.png' %}">
 
     {% block extra_css %}{% endblock %}
@@ -26,7 +27,11 @@
 
 <body>
     {% wagtailuserbar %}
-    {% block content %}{% endblock %}
+    <div class="page">
+        {% include 'header.html' %}
+        {% block content %}{% endblock %}
+        {% include 'footer.html' %}
+    </div>
     <script src="{% static '/js/bootstrap.bundle.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
