@@ -3,11 +3,8 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 
 from wagtail.models import Page, Orderable
-from wagtail.fields import RichTextField, StreamField
-from wagtail import blocks
+from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.search import index
-from wagtail.images.blocks import ImageChooserBlock
 
 
 class NewsIndexPage(Page):
@@ -28,23 +25,12 @@ class NewsPage(Page):
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
 
-    # card = StreamField([
-    #     ('heading', blocks.CharBlock(max_length=255)),
-    #     ('intro', blocks.RichTextBlock()),
-    #     ('image', ImageChooserBlock())
-    # ], use_json_field=True)
-
     def main_image(self):
         gallery_item = self.gallery_images.first()
         if gallery_item:
             return gallery_item.image
         else:
             return None
-
-    # search_fields = Page.search_fields + [
-    #     index.SearchField('intro'),
-    #     index.SearchField('body'),
-    # ]
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),

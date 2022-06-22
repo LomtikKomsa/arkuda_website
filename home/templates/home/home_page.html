@@ -8,24 +8,6 @@
 {% block content %}
 
 <main class="main">
-    {% comment %} <div id="homeCarousel" class="carousel slide pt-5" data-bs-ride="carousel">
-        <div class="container">
-            <div class="carousel-inner">
-                {% for carousel_image in page.carousel_images.all %}
-                {% image carousel_image original as ci %}
-                <div class="carousel-item" data-bs-interval="10000">
-                    <a href="#"><img src="{{ ci.url }}" width="100%" height="400px" alt=""></a>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            </div>
-        </div>
-    </div> {% endcomment %}
     <div class="news py-5">
         <div class="container">
             <h1>Последние новости</h1>
@@ -56,27 +38,6 @@
             <p class="text-center pt-3"><a href="{% pageurl newsindexpage %}">Все новости</a></p>
         </div>
     </div>
-    {% comment %} <div class="tours py-5">
-        <div class="container">
-            <h1>Туры</h1>
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 gy-3">
-                <div class="col">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'empty_image.png' %}" width="100%" height="200px" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-                        <div class="card-body">
-                            <p class="card-text">
-                                Описание
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="#"><span>Подробнее...</span></a>
-                                <small class="text-muted">Дата</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> {% endcomment %}
 </main>
 
 {% endblock content %}
