@@ -14,3 +14,5 @@ db.sqlite3-journal
 
 # Visual Studo Code
 .vscode
+
+.idea
